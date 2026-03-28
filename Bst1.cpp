@@ -145,31 +145,54 @@ int SumaNajmniejszychElementow(galaz* root, int k){
     }
     return suma;
 }
+galaz* Polacz_2_BST(galaz* root1, galaz* root2){
+    vector<int> wektor1;
+    vector<int> wektor2;
+    
+    galaz* root_wynik = new galaz();
 
+    stworz_wektor(root1, wektor1);
+    stworz_wektor(root2, wektor2);
+
+    for(int i =0; i<wektor1.size(); i++){
+        InsertBST(root_wynik, wektor1[i]);
+    }
+    for(int i =0; i<wektor2.size(); i++){
+        InsertBST(root_wynik, wektor2[i]);
+    }
+    return root_wynik;
+}
 int main(){
 
     galaz* root = nullptr;
+    galaz* root2 = nullptr;
+
     root = InsertBST(root, 5);
-    
-    InsertBST(root, 2);
+    root2 = InsertBST(root2, 2);   
+
+    InsertBST(root2, 4);
+    InsertBST(root2, 6);
+    InsertBST(root2, 9);
     InsertBST(root, 8);
-    InsertBST(root, 12);
-    InsertBST(root, 4);
-    InsertBST(root, 6);
-    InsertBST(root, 9);
+    InsertBST(root, 1);
+
+    
 
     wyswielt(root);
     cout<<endl;
 
-    maks(root);
-    min(root);
+    wyswielt(root2);
+    cout<<endl;
+
+    //maks(root);
+    //min(root);
 
     //FindBST(root,2);
     //wyswielt(FindBST2(root, 8));
 
     //wyswielt(delateBST(root, 6));
 
-    cout<<"Suma: "<< SumaNajmniejszychElementow(root, 3);
-
+    //cout<<"Suma: "<< SumaNajmniejszychElementow(root, 3);
+    wyswielt(Polacz_2_BST(root, root2));
     return 0;
 }
