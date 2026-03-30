@@ -3,14 +3,16 @@
 
 using namespace std;
 
-void dfs(int v, vector<vector <int>> &lisa_sasiedzta,  vector<bool> &odwiedzone){
-    
+void dfs(int v, vector<vector <int>> &lisa_sasiedzta,  vector<bool> &odwiedzone,vector<int> &odp, int glebia){
+    glebia+= 1;
     odwiedzone[v] = true; 
-
+    odp[v] = glebia;
+    
     for(int sasiad : lisa_sasiedzta[v]){
+        
         if(odwiedzone[sasiad] == false){
-            cout<<"1 ";
-            dfs(sasiad, lisa_sasiedzta, odwiedzone);
+            
+            dfs(sasiad, lisa_sasiedzta, odwiedzone, odp, glebia);
         }
     }
     
@@ -19,13 +21,24 @@ void dfs(int v, vector<vector <int>> &lisa_sasiedzta,  vector<bool> &odwiedzone)
 int main(){
     vector<vector <int>> lisa_sasiedzta(6);
     vector<bool> odwiedzone(6, false);
-    int krawedzie = 5;
-    int wierzcholki = 6;
+    vector<int> odp(6,0);
+
+    int glebia =0;
+    int maks = 0;
+    string wynik="";
+
     lisa_sasiedzta[0] = {1, 2};
-    lisa_sasiedzta[1] = {3, 4};
-    lisa_sasiedzta[2] = {0, 5};
-    lisa_sasiedzta[3] = {};
+    lisa_sasiedzta[1] = {4};
+    lisa_sasiedzta[2] = {3};
+    lisa_sasiedzta[3] = {5};
     lisa_sasiedzta[4] = {};
     lisa_sasiedzta[5] = {};
-    dfs(0, lisa_sasiedzta, odwiedzone);
+
+    dfs(0, lisa_sasiedzta, odwiedzone, odp, glebia);
+    for(int i = 0;i<6;i++){
+        if(odp[i] > maks){
+            wynik = to_string(i) + " Odleglosc: " + to_string(odp[i]);
+        }
+    }
+    cout<<"Najdalszy wierzcholek to: " + wynik;
 }
