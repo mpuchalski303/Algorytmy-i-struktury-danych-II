@@ -37,7 +37,8 @@ int main(){
     dfs(0, lisa_sasiedzta, odwiedzone, odp, glebia);
     for(int i = 0;i<6;i++){
         if(odp[i] > maks){
-            wynik = to_string(i) + " Odleglosc: " + to_string(odp[i]);
+            maks = odp[i];
+            wynik = to_string(i) + " Odleglosc: " + to_string(odp[i]- 1);
         }
     }
     cout<<"Najdalszy wierzcholek to: " + wynik;
